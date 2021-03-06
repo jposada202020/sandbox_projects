@@ -45,9 +45,7 @@ def get_width(font):
             width_max = max(width_max, this_glyph.width+this_glyph.dx)
     return width_max
 
-
 def get_glyph_values(letter):
-    """help print debug function"""
     glyphc= font.get_glyph(ord(letter))
     print(f"Character:{letter} height:{glyphc.height} width:{glyphc.width} dx:{glyphc.dx} dy:{glyphc.dy}"
           f" shiftx:{glyphc.shift_x} shifty: {glyphc.shift_y}")
@@ -87,6 +85,8 @@ def directional_text(text, local_group, x, y, offset, offset_x, direction):
         if direction == "downwards":
             face.transpose_xy = True
             face.flip_y = True
+        if direction == "right_to_left":
+            face.flip_x = True
 
         local_group.append(face)
 
@@ -103,7 +103,7 @@ def directional_text(text, local_group, x, y, offset, offset_x, direction):
 
 
 if uname()[0] == 'samd51':
-    display = board.DISPLAY
+    display= board.DISPLAY
 else:
     display = PyGameDisplay(width=320, height=240)
 
@@ -124,7 +124,6 @@ bitmap2 = displayio.Bitmap(2, 320, 2)
 tile_grid2 = displayio.TileGrid(bitmap2, pixel_shader=palette, x=50, y=0)
 local_group.append(tile_grid2)
 
-
 offset_x = width // 2
 offset = ascent // 2
 
@@ -134,7 +133,7 @@ directional_text(text_test, local_group, 50, 50, offset, offset_x, "Straight")
 directional_text(text_test, local_group, 50, 50, offset, offset_x, "upwards")
 directional_text(text_test, local_group, 50, 50, offset, offset_x, "downwards")
 directional_text(text_test, local_group, 200, 50, offset, offset_x, "top_bottom")
-directional_text(text_test, local_group, 310, 220, offset, offset_x, "right_to_left")
+directional_text(text_test, local_group, 300, 220, offset, offset_x, "right_to_left")
 
 display.show(local_group)
 
