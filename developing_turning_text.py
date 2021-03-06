@@ -7,8 +7,6 @@ else:
     from blinka_displayio_pygamedisplay import PyGameDisplay
 
 
-
-
 def get_ascent_descent(font):
     """ Private function to calculate ascent and descent font values """
     if hasattr(font, "ascent"):
@@ -33,7 +31,6 @@ def get_ascent_descent(font):
 
 def get_width(font):
     """ Private function to calculate average width font value """
-
     # check a few glyphs for maximum ascender and descender height
     glyphs = "M j'"  # choose glyphs with highest ascender and lowest
     try:
@@ -48,7 +45,9 @@ def get_width(font):
             width_max = max(width_max, this_glyph.width+this_glyph.dx)
     return width_max
 
+
 def get_glyph_values(letter):
+    """help print debug function"""
     glyphc= font.get_glyph(ord(letter))
     print(f"Character:{letter} height:{glyphc.height} width:{glyphc.width} dx:{glyphc.dx} dy:{glyphc.dy}"
           f" shiftx:{glyphc.shift_x} shifty: {glyphc.shift_y}")
@@ -74,7 +73,6 @@ def directional_text(text, local_group, x, y, offset, offset_x, direction):
             pos_y = y - glyph.height - glyph.dy + offset
             pos_x = x + glyph.dx
 
-
         face = displayio.TileGrid(
             glyph.bitmap,
             pixel_shader=palette,
@@ -89,7 +87,6 @@ def directional_text(text, local_group, x, y, offset, offset_x, direction):
         if direction == "downwards":
             face.transpose_xy = True
             face.flip_y = True
-
 
         local_group.append(face)
 
@@ -106,11 +103,11 @@ def directional_text(text, local_group, x, y, offset, offset_x, direction):
 
 
 if uname()[0] == 'samd51':
-    display= board.DISPLAY
+    display = board.DISPLAY
 else:
     display = PyGameDisplay(width=320, height=240)
 
-local_group = displayio.Group(max_size=60, scale=1)
+local_group = displayio.Group(max_size=100, scale=1)
 font = bitmap_font.load_font("fonts/Helvetica-Bold-16.bdf")
 palette = displayio.Palette(2)
 palette[0] = 0x004400
@@ -118,7 +115,6 @@ palette[1] = 0x00FFFF
 
 ascent, descent = get_ascent_descent(font)
 width = get_width(font)
-
 
 bitmap3 = displayio.Bitmap(320, 2, 2)
 tile_grid3 = displayio.TileGrid(bitmap3, pixel_shader=palette, x=0, y=50)
@@ -132,17 +128,15 @@ local_group.append(tile_grid2)
 offset_x = width // 2
 offset = ascent // 2
 
-
 text_test = "CircuitPython"
 
-directional_text(text_test, local_group, 50, 50, offset, "Straight")
-directional_text(text_test, local_group, 50, 50, offset, "upwards")
-directional_text(text_test, local_group, 50, 50, offset, "downwards")
+directional_text(text_test, local_group, 50, 50, offset, offset_x, "Straight")
+directional_text(text_test, local_group, 50, 50, offset, offset_x, "upwards")
+directional_text(text_test, local_group, 50, 50, offset, offset_x, "downwards")
 directional_text(text_test, local_group, 200, 50, offset, offset_x, "top_bottom")
-directional_text(text_test, local_group, 200, 50, offset, offset_x, "right_to_left")
+directional_text(text_test, local_group, 310, 220, offset, offset_x, "right_to_left")
 
-#
 display.show(local_group)
-#
+
 while True:
     pass
