@@ -52,7 +52,7 @@ def get_glyph_values(letter):
 
 
 def directional_text(text, local_group, x, y, offset, offset_x, direction):
-    for letter in text_test:
+    for letter in text:
         glyph = font.get_glyph(ord(letter))
 
         if direction == "Straight":
@@ -85,8 +85,6 @@ def directional_text(text, local_group, x, y, offset, offset_x, direction):
         if direction == "downwards":
             face.transpose_xy = True
             face.flip_y = True
-        if direction == "right_to_left":
-            face.flip_x = True
 
         local_group.append(face)
 
@@ -128,12 +126,14 @@ offset_x = width // 2
 offset = ascent // 2
 
 text_test = "CircuitPython"
+top_to_bottom_text = "我 是 高大壮"
+right_to_left = "מזל טוב"
 
 directional_text(text_test, local_group, 50, 50, offset, offset_x, "Straight")
 directional_text(text_test, local_group, 50, 50, offset, offset_x, "upwards")
 directional_text(text_test, local_group, 50, 50, offset, offset_x, "downwards")
-directional_text(text_test, local_group, 200, 50, offset, offset_x, "top_bottom")
-directional_text(text_test, local_group, 300, 220, offset, offset_x, "right_to_left")
+directional_text(top_to_bottom_text, local_group, 200, 50, offset, offset_x, "top_bottom")
+directional_text(right_to_left, local_group, 300, 220, offset, offset_x, "right_to_left")
 
 display.show(local_group)
 
