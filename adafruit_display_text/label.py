@@ -76,7 +76,6 @@ class Label(LabelBase):
 
         max_glyphs = kwargs.get("max_glyphs", None)
         text = kwargs.get("text", None)
-
         if not max_glyphs and not text:
             raise RuntimeError("Please provide a max size, or initial text")
         self._tab_replacement = kwargs.get("tab_replacement", (4, " "))
@@ -94,7 +93,6 @@ class Label(LabelBase):
 
         self.width = max_glyphs
         self._font = font
-
         self._text = None
         self._anchor_point = kwargs.get("anchor_point", None)
         self.x = kwargs.get("x", 0)
@@ -103,30 +101,21 @@ class Label(LabelBase):
         self.height = self._font.get_bounding_box()[1]
         self._line_spacing = kwargs.get("line_spacing", 1.25)
         self._bounding_box = None
-        self.theme = kwargs.get("theme", None)
 
-
+        self._background_tight = kwargs.get(
+            "background_tight", False
+        )  # sets padding status for text background box
 
         # Create the two-color text palette
         self.palette = displayio.Palette(2)
         self.palette[0] = 0
         self.palette.make_transparent(0)
+        self.color = kwargs.get("color", 0xFFFFFF)
 
-
-
+        self._background_color = kwargs.get("background_color", None)
         self._background_palette = displayio.Palette(1)
         self._added_background_tilegrid = False
 
-        if self.theme == "MAGTAG":
-            self._background_tight = True
-            self._background_color = 0xD4D4D4
-            self.color = 0x0F0F0F
-        else:
-            self._background_tight = kwargs.get(
-            "background_tight", False)  # sets padding status for text background box
-            self.color = kwargs.get("color", 0xFFFFFF)
-
-        # self._background_color = kwargs.get("background_color", None)
         self._padding_top = kwargs.get("padding_top", 0)
         self._padding_bottom = kwargs.get("padding_bottom", 0)
         self._padding_left = kwargs.get("padding_left", 0)
@@ -139,8 +128,6 @@ class Label(LabelBase):
             kwargs.get("anchor_point", None) is not None
         ):
             self.anchored_position = kwargs.get("anchored_position", None)
-
-
 
     def _create_background_box(self, lines, y_offset):
         """Private Class function to create a background_box
