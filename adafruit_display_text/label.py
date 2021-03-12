@@ -331,3 +331,24 @@ class Label(LabelBase):
 
     def _set_background_color(self, new_color):
         self._update_background_color(new_color)
+
+
+class LabelT(Label):
+    """
+    Themed Label following color styles in PySimpleGui
+    :param str: Them to apply to the label
+    """
+    def __init__(self, font, theme: str, **kwargs):
+        from adafruit_display_text import get_hex
+        from adafruit_display_text import styles
+        self.styles = styles.theme
+        colorth = get_hex(self.styles[theme]["TEXT"])
+        backgroundth = get_hex(self.styles[theme]["BACKGROUND"])
+        super().__init__(font, color=colorth, background_color=backgroundth, **kwargs)
+
+    def display_themes(self, columns: int) -> None:
+        """Returns the list of themes
+        :param int columns: number of columns to display the list
+        """
+        themes = list(self.styles.keys())
+        [print(themes[i: i + columns]) for i in range(0, len(themes), columns)]

@@ -1,7 +1,7 @@
 from os import uname
 import displayio
 from adafruit_bitmap_font import bitmap_font
-from adafruit_display_text import themed_label
+from adafruit_display_text import label
 
 if uname()[0] == 'samd51':
     import board
@@ -19,7 +19,7 @@ MEDIUM_FONT = bitmap_font.load_font("fonts/leaguespartan11.bdf")
 BIG_FONT = bitmap_font.load_font("fonts/LibreBodoniv2002-Bold-27.bdf")
 TIME_PAUSE = 2
 
-text_initial_specs = themed_label.Label(MEDIUM_FONT,
+text_initial_specs = label.LabelT(MEDIUM_FONT,
                                  "DarkBrown7",
                                  text="CircuitPython",
                                  x=display.width // 2,
@@ -34,7 +34,7 @@ text_initial_specs = themed_label.Label(MEDIUM_FONT,
 main_group.append(text_initial_specs)
 display.show(main_group)
 
-text_initial_specs = themed_label.Label(MEDIUM_FONT,
+text_initial_specs = label.LabelT(MEDIUM_FONT,
                                  "LightTeal",
                                  text="CircuitPython",
                                  x=display.width // 2,
@@ -48,10 +48,9 @@ text_initial_specs = themed_label.Label(MEDIUM_FONT,
                                  )
 
 main_group.append(text_initial_specs)
-text_initial_specs.display_themes(4)
 display.show(main_group)
 
-text_initial_specs = themed_label.Label(MEDIUM_FONT,
+text_initial_specs = label.LabelT(MEDIUM_FONT,
                                  "LightBlue1",
                                  text="CircuitPython",
                                  x=display.width // 2,
@@ -65,10 +64,9 @@ text_initial_specs = themed_label.Label(MEDIUM_FONT,
                                  )
 
 main_group.append(text_initial_specs)
-text_initial_specs.display_themes(4)
 display.show(main_group)
 
-text_initial_specs = themed_label.Label(MEDIUM_FONT,
+text_initial_specs = label.LabelT(MEDIUM_FONT,
                                  "BrightColors",
                                  text="CircuitPython",
                                  x=display.width // 2,
@@ -82,10 +80,9 @@ text_initial_specs = themed_label.Label(MEDIUM_FONT,
                                  )
 
 main_group.append(text_initial_specs)
-text_initial_specs.display_themes(4)
 display.show(main_group)
 
-text_initial_specs = themed_label.Label(MEDIUM_FONT,
+text_initial_specs = label.LabelT(MEDIUM_FONT,
                                  "Reds",
                                  text="CircuitPython",
                                  x=display.width // 2,
