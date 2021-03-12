@@ -334,14 +334,17 @@ class Label(LabelBase):
 
 
 class LabelT(Label):
-    """
-    Themed Label following color styles in PySimpleGui
-    :param str: Them to apply to the label
+    """This label has the same functionalities as Label. It use a theme to display
+    different colors according to selected theme.
+
+    :param Font font: A font class that has ``get_bounding_box`` and ``get_glyph``.
+      Must include a capital M for measuring character size.
+    :param theme str: Theme to utilize to display the label
     """
     def __init__(self, font, theme: str, **kwargs):
         from adafruit_display_text import get_hex
         from adafruit_display_text import styles
-        self.styles = styles.theme
+        self.styles = styles.THEME
         colorth = get_hex(self.styles[theme]["TEXT"])
         backgroundth = get_hex(self.styles[theme]["BACKGROUND"])
         super().__init__(font, color=colorth, background_color=backgroundth, **kwargs)

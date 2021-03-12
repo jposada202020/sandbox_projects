@@ -19,8 +19,8 @@ MEDIUM_FONT = bitmap_font.load_font("fonts/leaguespartan11.bdf")
 BIG_FONT = bitmap_font.load_font("fonts/LibreBodoniv2002-Bold-27.bdf")
 TIME_PAUSE = 2
 
-text_initial_specs = label.LabelT(MEDIUM_FONT,
-                                 "DarkBrown7",
+text_initial_specs = label.Label(MEDIUM_FONT,
+                                 # "DarkBrown7",
                                  text="CircuitPython",
                                  x=display.width // 2,
                                  y=display.height // 2,

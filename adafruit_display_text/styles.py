@@ -1,4 +1,12 @@
-theme = {
+# SPDX-FileCopyrightText: 2021 Jose David M.
+#
+# SPDX-License-Identifier: MIT
+
+"""
+Display Text style definitions. Based on the styles of the PySimpleGui under the LGPL3+ license.
+"""
+
+THEME = {
     "Material1": {
         "BACKGROUND": "#E3F2FD",
         "TEXT": "#000000",
