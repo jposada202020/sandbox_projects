@@ -51,6 +51,20 @@ text_area.x = 10
 text_area.y = 10
 display.show(main_group)
 time.sleep(TIME_PAUSE)
+# Testing creating label without text to see if there is an error
+try:
+    text_area = label.Label(terminalio.FONT, max_glyphs=10)
+except:
+    print("Fail setting-up label without text")
+    warning_text = label.Label(BIG_FONT,
+                                     text="Test Fail",
+                                     x=display.width // 2,
+                                     y=display.height // 4,
+                                     background_color=0x004499)
+    main_group.append(warning_text)
+display.show(main_group)
+time.sleep(TIME_PAUSE)
+main_group.pop()
 # Testing creating label with initial position
 text_area.text = "Testing Position"
 text_middle = label.Label(terminalio.FONT,
@@ -245,6 +259,20 @@ text_area.x = 10
 text_area.y = 10
 display.show(main_group)
 time.sleep(TIME_PAUSE)
+# Testing creating label without text to see if there is an error
+try:
+    text_area = label.Label(terminalio.FONT, max_glyphs=10)
+except:
+    print("Fail setting-up label without text")
+    warning_text = bitmap_label.Label(BIG_FONT,
+                                     text="Test Fail",
+                                     x=display.width // 2,
+                                     y=display.height // 4,
+                                     background_color=0x004499)
+    main_group.append(warning_text)
+display.show(main_group)
+time.sleep(TIME_PAUSE)
+main_group.pop()
 # Testing creating label with initial position
 text_area.text = "Testing Position"
 text_middle = bitmap_label.Label(terminalio.FONT,
