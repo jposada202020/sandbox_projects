@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 """
 
-`scale`
+`scales`
 ================================================================================
 A cartesian plane widget for displaying graphical information.
 
@@ -373,29 +373,58 @@ class Scale(Axes):
         self.append(pointer_shape)
 
     def animate_pointer(self, value):
-        self.pointer.points = [
-            (
-                self.x + self.stroke + self._tick_length + self._space,
-                self.y + self._pointer_stroke // 2 - value,
-            ),
-            (
-                self.x
-                + self.stroke
-                + self._tick_length
-                + self._space
-                + self._pointer_length,
-                self.y + self._pointer_stroke // 2 - value,
-            ),
-            (
-                self.x
-                + self.stroke
-                + self._tick_length
-                + self._space
-                + self._pointer_length,
-                self.y - self._pointer_stroke // 2 - value,
-            ),
-            (
-                self.x + self.stroke + self._tick_length + self._space,
-                self.y - self._pointer_stroke // 2 - value,
-            ),
-        ]
+
+        if self.direction:
+            self.pointer.points = [
+                    (
+                        self.x - self._pointer_stroke // 2 + value,
+                        self.y - self.stroke - self._tick_length - self._space,
+                    ),
+                    (
+                        self.x - self._pointer_stroke // 2 + value,
+                        self.y
+                        - self.stroke
+                        - self._tick_length
+                        - self._space
+                        - self._pointer_length,
+                    ),
+                    (
+                        self.x + self._pointer_stroke // 2 + value,
+                        self.y
+                        - self.stroke
+                        - self._tick_length
+                        - self._space
+                        - self._pointer_length,
+                    ),
+                    (
+                        self.x + self._pointer_stroke // 2 + value,
+                        self.y - self.stroke - self._tick_length - self._space,
+                    ),
+                ]
+        else:
+            self.pointer.points = [
+                (
+                    self.x + self.stroke + self._tick_length + self._space,
+                    self.y + self._pointer_stroke // 2 - value,
+                ),
+                (
+                    self.x
+                    + self.stroke
+                    + self._tick_length
+                    + self._space
+                    + self._pointer_length,
+                    self.y + self._pointer_stroke // 2 - value,
+                ),
+                (
+                    self.x
+                    + self.stroke
+                    + self._tick_length
+                    + self._space
+                    + self._pointer_length,
+                    self.y - self._pointer_stroke // 2 - value,
+                ),
+                (
+                    self.x + self.stroke + self._tick_length + self._space,
+                    self.y - self._pointer_stroke // 2 - value,
+                ),
+            ]
